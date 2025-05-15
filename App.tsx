@@ -9,6 +9,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen';
 import UserScreen from './src/screens/UserScreen';
 
+// Context
+import UserContextProvider from './src/contexts/userContext';
+
 export type RootStackParamlist = {
   Home: undefined;
   User: { username: String };
@@ -19,10 +22,12 @@ const {Navigator, Screen} = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Navigator>
-        <Screen name="Home" component={HomeScreen} />
-        <Screen name="User" component={UserScreen} />
-      </Navigator>
+      <UserContextProvider>
+        <Navigator>
+          <Screen name="Home" component={HomeScreen} />
+          <Screen name="User" component={UserScreen} />
+        </Navigator>
+      </UserContextProvider>
     </NavigationContainer>
   );
 }
