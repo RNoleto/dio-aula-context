@@ -1,8 +1,10 @@
+import { useState, useContext } from "react";
 import { Text, View, TextInput, Button } from "react-native";
-import { useState } from "react";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamlist } from "../../App";
+
+import { UserContext } from "../contexts/userContext";
 
 type HomeScreenProps = {
     navigation: StackNavigationProp<RootStackParamlist, "Home">;
@@ -11,8 +13,10 @@ type HomeScreenProps = {
 export default function HomeScreen({navigation}: HomeScreenProps) {
 
     const [inputText, setInputText ] = useState("");
+    const userContext = useContext(UserContext);
 
     const navigateToUserScreen = () => {
+        userContext?.save(inputText);
         navigation.navigate("User", { username: inputText })
     }
 
